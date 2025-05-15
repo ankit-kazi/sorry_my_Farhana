@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>I'm Sorry Farhana</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --main-color: #ff4081;
+      --secondary-color: #e91e63;
+      --text-color: #333;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .background-image {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('/api/placeholder/1080/1920') no-repeat center center;
+      background-size: cover;
+      opacity: 0.15;
+      z-index: -2;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      border-radius: 24px;
+      padding: 40px 30px;
+      width: 90%;
+      max-width: 420px;
+      text-align: center;
+      animation: fadeIn 1.2s ease-in-out;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .dino-container {
+      position: relative;
+      margin: 0 auto 10px;
+      width: 120px;
+      height: 120px;
+    }
+
+    .dino {
+      font-size: 90px;
+      position: relative;
+      animation: bounce 1.8s infinite, shake 5s infinite;
+      display: inline-block;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+      transform-origin: bottom center;
+    }
+
+    .tear {
+      position: absolute;
+      color: #42a5f5;
+      font-size: 18px;
+      animation: tearFall 2.5s infinite;
+      opacity: 0;
+    }
+
+    h1 {
+      font-size: 28px;
+      background: linear-gradient(to right, var(--main-color), var(--secondary-color));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin: 15px 0;
+      font-weight: 600;
+    }
+
+    .type-text {
+      margin: 25px 0;
+      font-size: 18px;
+      color: var(--text-color);
+      min-height: 100px;
+      line-height: 1.6;
+    }
+
+    button {
+      padding: 12px 30px;
+      font-size: 16px;
+      background: linear-gradient(to right, var(--main-color), var(--secondary-color));
+      border: none;
+      border-radius: 30px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 20px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(233, 30, 99, 0.4);
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: rotate(0); }
+      92% { transform: rotate(0); }
+      94% { transform: rotate(-5deg); }
+      96% { transform: rotate(5deg); }
+      98% { transform: rotate(-3deg); }
+    }
+
+    @keyframes tearFall {
+      0% { top: 40px; left: 50px; opacity: 0; }
+      10% { opacity: 0.8; }
+      80% { opacity: 0.8; }
+      100% { top: 80px; left: 40px; opacity: 0; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .love-float {
+      position: absolute;
+      white-space: nowrap;
+      font-weight: bold;
+      color: var(--main-color);
+      animation: floatLove 12s linear infinite;
+      opacity: 0;
+      pointer-events: none;
+      text-shadow: 0 0 5px rgba(255,255,255,0.7);
+    }
+
+    @keyframes floatLove {
+      0% {
+        transform: translateX(-100vw) translateY(0vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.7;
+      }
+      90% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateX(100vw) translateY(-100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .hearts-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .heart {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background: rgba(255, 64, 129, 0.2);
+      transform: rotate(45deg);
+      animation: floatUp 10s linear infinite;
+    }
+
+    .heart:before,
+    .heart:after {
+      content: '';
+      width: 15px;
+      height: 15px;
+      background: rgba(255, 64, 129, 0.2);
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    .heart:before {
+      top: -7.5px;
+      left: 0;
+    }
+
+    .heart:after {
+      top: 0;
+      left: -7.5px;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) rotate(45deg) scale(0.5); opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(45deg) scale(1.5); opacity: 0; }
+    }
+
+    @media (max-width: 500px) {
+      .card {
+        padding: 30px 20px;
+      }
+      
+      .dino {
+        font-size: 70px;
+      }
+
+      .type-text {
+        font-size: 16px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Image -->
+  <div class="background-image"></div>
+
+  <!-- Floating Love Messages -->
+  <div id="love-messages"></div>
+
+  <!-- Heart Particles -->
+  <div class="hearts-container" id="hearts-container"></div>
+
+  <!-- Main Card -->
+  <div class="card">
+    <div class="dino-container">
+      <div class="dino">🦖</div>
+      <span class="tear">💧</span>
+    </div>
+    <h1>I'm Sorry, Farhana</h1>
+    <div class="type-text" id="message"></div>
+    <button onclick="location.href='memory.html'">
+      <i class="fas fa-heart"></i> Next Page
+    </button>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Typewriter Effect
+    const msg = "Gublu amake maaf kore dau... Tumi amar cute bachcha, pagol toh vul kore boseche, next time tumi taake jento matite pute debe 🥺🥺,... I LOVE YOU";
+    let index = 0;
+    const el = document.getElementById("message");
+    
+    function typeWriter() {
+      if (index < msg.length) {
+        el.innerHTML += msg.charAt(index);
+        index++;
+        setTimeout(typeWriter, 50);
+      }
+    }
+    
+    setTimeout(typeWriter, 800);
+
+    // Floating Love Messages
+    const loveContainer = document.getElementById('love-messages');
+    const phrases = ['I LOVE YOU', '❤️', 'SORRY', 'FORGIVE ME', '🥺'];
+    
+    function createLoveFloat() {
+      const love = document.createElement('div');
+      love.className = 'love-float';
+      love.innerText = phrases[Math.floor(Math.random() * phrases.length)];
+      love.style.top = Math.random() * 100 + 'vh';
+      love.style.left = '-200px';
+      love.style.fontSize = (16 + Math.random() * 12) + 'px';
+      love.style.animationDuration = (10 + Math.random() * 8) + 's';
+      loveContainer.appendChild(love);
+      
+      setTimeout(() => {
+        love.remove();
+      }, 18000);
+    }
+
+    // Create initial love floats
+    for (let i = 0; i < 10; i++) {
+      setTimeout(() => {
+        createLoveFloat();
+      }, i * 600);
+    }
+
+    // Keep creating love floats
+    setInterval(createLoveFloat, 1200);
+
+    // Create heart particles
+    const heartsContainer = document.getElementById('hearts-container');
+    
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.opacity = 0.2 + Math.random() * 0.5;
+      heart.style.animationDuration = (8 + Math.random() * 10) + 's';
+      
+      const size = (10 + Math.random() * 20);
+      heart.style.width = heart.style.height = size + 'px';
+      heart.style.setProperty('--size', size + 'px');
+      
+      const color = Math.random() > 0.5 ? 'rgba(255, 64, 129, 0.3)' : 'rgba(233, 30, 99, 0.3)';
+      heart.style.background = color;
+      
+      heartsContainer.appendChild(heart);
+      
+      setTimeout(() => {
+        heart.remove();
+      }, 18000);
+    }
+
+    // Create initial hearts
+    for (let i = 0; i < 20; i++) {
+      setTimeout(() => {
+        createHeart();
+      }, i * 300);
+    }
+
+    // Keep creating hearts
+    setInterval(createHeart, 800);
+
+    // Animate tears
+    function animateTear() {
+      const tear = document.querySelector('.tear');
+      tear.style.animation = 'none';
+      tear.offsetHeight; // Trigger reflow
+      tear.style.animation = 'tearFall 2.5s infinite';
+      tear.style.opacity = '0';
+      
+      setTimeout(() => {
+        tear.style.opacity = '1';
+      }, 100);
+    }
+
+    setInterval(animateTear, 2600);
+  </script>
+</body>
+</html>
